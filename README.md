@@ -130,41 +130,6 @@ PYTHONPATH=src python3 -m scientist_rag_assistant.demo --figures
 - Реальные ключи API не хранятся в репозитории.
 - Если источник не содержит ответа, агент не должен заполнять пробел догадкой.
 
-## Проверка перед сдачей
-
-```bash
-test -f docs/screenshots/rag-assistant-interface.jpg
-test -f docs/coursework/coursework-selivanov.pdf
-test -f docs/demo.md
-python3 - <<'PY'
-from pathlib import Path
-
-figures = [
-    "рисунок-1-rag.png",
-    "рисунок-1-конвейер.png",
-    "рисунок-2-интерфейс.png",
-    "рисунок-2-подготовка.png",
-    "рисунок-3-знания.png",
-    "рисунок-3-результат.png",
-    "рисунок-4-rag-демо.png",
-    "рисунок-4-конвейер-чб.png",
-    "рисунок-5-структуризация.png",
-    "рисунок-6-агенты.png",
-]
-
-readme = Path("README.md").read_text(encoding="utf-8")
-demo = Path("docs/demo.md").read_text(encoding="utf-8")
-for name in figures:
-    assert Path("docs/figures", name).is_file(), name
-    assert f"docs/figures/{name}" in readme, name
-    assert name in demo, name
-
-assert len(list(Path("docs/figures").glob("*.png"))) == len(figures)
-PY
-PYTHONPATH=src python3 -m scientist_rag_assistant.demo --figures
-python3 -m compileall -q src
-```
-
 ## Результат
 
 Репозиторий оформлен как отчёт по моему RAG+LLM помощнику учёного: есть описание, архитектура, правильный скриншот, курсовая работа, все рисунки из демонстрации, промпт и минимальная демонстрация принципа поиска по источникам.
